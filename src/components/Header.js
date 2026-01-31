@@ -35,7 +35,6 @@ export default function Header() {
     };
 
     return (
-    return (
         <>
             <header>
                 <div className="container">
