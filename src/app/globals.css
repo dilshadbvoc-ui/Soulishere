@@ -89,6 +89,12 @@ header::before {
   padding: 0 2rem;
 }
 
+@media (max-width: 600px) {
+  .container {
+    padding: 0 1rem;
+  }
+}
+
 .header-content {
   display: flex;
   justify-content: space-between;

@@ -114,7 +114,7 @@ export default function AdminPanel() {
                 )}
 
                 {/* Tabs */}
-                <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.5rem' }}>
+                <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
                     <button
                         className={`btn ${activeTab === 'memorials' ? 'btn-primary' : 'btn-secondary'}`}
                         onClick={() => setActiveTab('memorials')}

@@ -63,7 +63,6 @@ export default function AdminSettings({ token }) {
         try {
             const res = await axios.post('/api/upload', formData, {
                 headers: {
-                    'Content-Type': 'multipart/form-data',
                     Authorization: `Bearer ${token}`
                 }
             });
@@ -106,7 +105,7 @@ export default function AdminSettings({ token }) {
 
     return (
         <div style={{ padding: '1rem' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
                 <h2 style={{ margin: 0 }}>Site Settings & Configuration</h2>
                 <button
                     onClick={handleSave}
@@ -118,7 +117,7 @@ export default function AdminSettings({ token }) {
                 </button>
             </div>
 
-            <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', borderBottom: '1px solid #eee' }}>
+            <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', borderBottom: '1px solid #eee', flexWrap: 'wrap' }}>
                 <button
                     style={{
                         padding: '1rem',
