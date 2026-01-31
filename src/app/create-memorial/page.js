@@ -146,6 +146,13 @@ function CreateMemorialContent() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Manual validation backing up HTML5 required
+        if (!formData.birthDate || !formData.deathDate) {
+            alert('Please fill in both birth and death dates');
+            return;
+        }
+
         setLoading(true);
 
         try {

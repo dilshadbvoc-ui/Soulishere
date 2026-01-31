@@ -58,6 +58,12 @@ export async function POST(request) {
             data: memorial
         }, { status: 201 });
     } catch (err) {
+        if (err.name === 'ValidationError') {
+            return NextResponse.json(
+                { success: false, message: Object.values(err.errors).map(e => e.message).join(', ') },
+                { status: 400 }
+            );
+        }
         return NextResponse.json(
             { success: false, message: err.message },
             { status: 500 }
