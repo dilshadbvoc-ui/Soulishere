@@ -262,15 +262,23 @@ export default function Home() {
               <div className="pricing-preview-card featured">
                 <div className="popular-badge">All Features Included</div>
                 <h3>Complete Memorial Package</h3>
-                <div className="pricing-preview-price">₹1,999<span>/one-time</span></div>
+                <div className="pricing-preview-price">
+                  {siteSettings?.pricing?.currency || '₹'}
+                  {(siteSettings?.pricing?.amount || 1999).toLocaleString()}
+                  <span>/one-time</span>
+                </div>
                 <ul className="pricing-preview-features">
-                  <li><FaCheck /> YouTube Video Embedding</li>
-                  <li><FaCheck /> Profile & Cover Pictures</li>
-                  <li><FaCheck /> Complete Guest Book</li>
-                  <li><FaCheck /> Family Tree Documentation</li>
-                  <li><FaCheck /> Life Timeline & Events</li>
-                  <li><FaCheck /> Premium Design Templates</li>
-                  <li><FaCheck /> Permanent Memorial Page</li>
+                  {(siteSettings?.pricing?.features || [
+                    'YouTube Video Embedding',
+                    'Profile & Cover Pictures',
+                    'Complete Guest Book',
+                    'Family Tree Documentation',
+                    'Life Timeline & Events',
+                    'Premium Design Templates',
+                    'Permanent Memorial Page'
+                  ]).map((feature, idx) => (
+                    <li key={idx}><FaCheck /> {feature}</li>
+                  ))}
                 </ul>
                 <Link href="/signup" className="btn btn-primary" style={{ width: '100%', marginTop: '1rem', padding: '1rem' }}>
                   Create Memorial Now

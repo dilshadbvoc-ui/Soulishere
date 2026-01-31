@@ -216,7 +216,9 @@ nav button:hover {
   overflow-y: auto;
 }
 
+
 .mobile-nav.active {
+  display: block;
   right: 0;
 }
 

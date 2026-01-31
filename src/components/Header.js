@@ -35,53 +35,63 @@ export default function Header() {
     };
 
     return (
-        <header>
-            <div className="container">
-                <div className="header-content">
-                    <Link href="/" className="logo">
-                        <Image src="/logo.png" alt="Soulishere" width={150} height={50} className="logo-img" style={{ height: '50px', width: 'auto' }} />
-                    </Link>
+    return (
+        <>
+            <header>
+                <div className="container">
+                    <div className="header-content">
+                        <Link href="/" className="logo">
+                            <Image src="/logo.png" alt="Soulishere" width={150} height={50} className="logo-img" style={{ height: '50px', width: 'auto' }} />
+                        </Link>
 
-                    {/* Desktop Navigation */}
-                    <nav className="desktop-nav">
-                        <ul>
-                            <li><Link href="/">Home</Link></li>
-                            <li><Link href="/features">Features</Link></li>
-                            {isAuthenticated ? (
-                                <>
-                                    <li><Link href="/dashboard">Dashboard</Link></li>
-                                    {isAdmin && <li><Link href="/admin">Admin</Link></li>}
-                                    <li>
-                                        <button onClick={logout}>Logout</button>
-                                    </li>
-                                </>
-                            ) : (
-                                <>
-                                    <li><Link href="/login">Login</Link></li>
-                                    <li>
-                                        <Link href="/signup" className="btn btn-primary btn-small">
-                                            Get Started
-                                        </Link>
-                                    </li>
-                                </>
-                            )}
-                        </ul>
-                    </nav>
+                        {/* Desktop Navigation */}
+                        <nav className="desktop-nav">
+                            <ul>
+                                <li><Link href="/">Home</Link></li>
+                                <li><Link href="/features">Features</Link></li>
+                                {isAuthenticated ? (
+                                    <>
+                                        <li><Link href="/dashboard">Dashboard</Link></li>
+                                        {isAdmin && <li><Link href="/admin">Admin</Link></li>}
+                                        <li>
+                                            <button onClick={logout}>Logout</button>
+                                        </li>
+                                    </>
+                                ) : (
+                                    <>
+                                        <li><Link href="/login">Login</Link></li>
+                                        <li>
+                                            <Link href="/signup" className="btn btn-primary btn-small">
+                                                Get Started
+                                            </Link>
+                                        </li>
+                                    </>
+                                )}
+                            </ul>
+                        </nav>
 
-                    {/* Mobile Menu Button */}
-                    <button
-                        className="mobile-menu-btn"
-                        onClick={() => setMobileMenuOpen(true)}
-                        aria-label="Open menu"
-                    >
-                        <FaBars />
-                    </button>
+                        {/* Mobile Menu Button */}
+                        <button
+                            className="mobile-menu-btn"
+                            onClick={() => setMobileMenuOpen(true)}
+                            aria-label="Open menu"
+                        >
+                            <FaBars />
+                        </button>
+                    </div>
                 </div>
-            </div>
+            </header>
 
             {/* Mobile Navigation Drawer */}
-            <div className={`mobile-nav-backdrop ${mobileMenuOpen ? 'active' : ''}`} onClick={() => setMobileMenuOpen(false)} />
-            <nav className={`mobile-nav ${mobileMenuOpen ? 'active' : ''}`}>
+            <div
+                className={`mobile-nav-backdrop ${mobileMenuOpen ? 'active' : ''}`}
+                onClick={() => setMobileMenuOpen(false)}
+                style={{ zIndex: 9998 }}
+            />
+            <nav
+                className={`mobile-nav ${mobileMenuOpen ? 'active' : ''}`}
+                style={{ zIndex: 9999 }}
+            >
                 <div className="mobile-nav-header">
                     <Link href="/" className="logo" onClick={() => setMobileMenuOpen(false)}>
                         <Image src="/logo.png" alt="Soulishere" width={120} height={40} className="logo-img" style={{ height: '45px', width: 'auto' }} />
@@ -117,6 +127,6 @@ export default function Header() {
                     )}
                 </ul>
             </nav>
-        </header>
+        </>
     );
 }

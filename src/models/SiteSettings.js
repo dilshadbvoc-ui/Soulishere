@@ -33,6 +33,28 @@ const siteSettingsSchema = new mongoose.Schema({
         }],
         gallery: [String]
     },
+    pricing: {
+        amount: {
+            type: Number,
+            default: 1999
+        },
+        currency: {
+            type: String,
+            default: '₹'
+        },
+        features: {
+            type: [String],
+            default: [
+                'YouTube Video Embedding',
+                'Profile & Cover Pictures',
+                'Complete Guest Book',
+                'Family Tree Documentation',
+                'Life Timeline & Events',
+                'Premium Design Templates',
+                'Permanent Memorial Page'
+            ]
+        }
+    },
     updatedAt: {
         type: Date,
         default: Date.now
