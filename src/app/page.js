@@ -9,6 +9,7 @@ import { FaPalette, FaMousePointer, FaShareAlt, FaComments, FaInfinity, FaChevro
 export default function Home() {
   const [openFaq, setOpenFaq] = useState(null);
   const [sampleMemorialId, setSampleMemorialId] = useState(null);
+  const [siteSettings, setSiteSettings] = useState(null);
 
   useEffect(() => {
     const fetchSampleMemorial = async () => {
@@ -21,7 +22,18 @@ export default function Home() {
         console.log('No sample memorial available');
       }
     };
+    const fetchSettings = async () => {
+      try {
+        const res = await axios.get('/api/site-settings');
+        if (res.data.success) {
+          setSiteSettings(res.data.data);
+        }
+      } catch (e) {
+        console.error('Failed to fetch settings');
+      }
+    };
     fetchSampleMemorial();
+    fetchSettings();
   }, []);
 
   const toggleFAQ = (index) => {
@@ -90,7 +102,7 @@ export default function Home() {
             </div>
             <div style={{ flex: 1, minWidth: '300px', display: 'flex', justifyContent: 'center' }}>
               <Image
-                src="/images/home_hero_family.png"
+                src={siteSettings?.images?.homeHeroFamily || "/images/home_hero_family.png"}
                 alt="Family Sharing Memories"
                 width={500}
                 height={350}
@@ -119,7 +131,7 @@ export default function Home() {
           {/* Feature with memorial sample image */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '3rem', marginBottom: '4rem', flexWrap: 'wrap' }}>
             <div style={{ flex: 1, minWidth: '300px' }}>
-              <Image src="/images/memorial_sample.png" alt="Memorial Preview" width={500} height={350} style={{ width: '100%', maxWidth: '500px', borderRadius: '16px', boxShadow: '0 10px 30px rgba(0,0,0,0.1)', height: 'auto' }} />
+              <Image src={siteSettings?.images?.memorialSample || "/images/memorial_sample.png"} alt="Memorial Preview" width={500} height={350} style={{ width: '100%', maxWidth: '500px', borderRadius: '16px', boxShadow: '0 10px 30px rgba(0,0,0,0.1)', height: 'auto' }} />
             </div>
             <div style={{ flex: 1, minWidth: '300px' }}>
               <h3 style={{ fontSize: '1.8rem', marginBottom: '1rem', color: 'var(--deep-purple)' }}>Beautiful Memorial Pages</h3>
@@ -162,7 +174,7 @@ export default function Home() {
 
           {/* Process flow image */}
           <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '3rem' }}>
-            <Image src="/images/process_flow.png" alt="Memorial Creation Process" width={800} height={400} style={{ maxWidth: '100%', width: '800px', borderRadius: '12px', height: 'auto' }} />
+            <Image src={siteSettings?.images?.processFlow || "/images/process_flow.png"} alt="Memorial Creation Process" width={800} height={400} style={{ maxWidth: '100%', width: '800px', borderRadius: '12px', height: 'auto' }} />
           </div>
 
           <div className="how-it-works-grid">
@@ -227,10 +239,10 @@ export default function Home() {
             Showcase your loved one&apos;s life through stunning photo galleries
           </p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem', maxWidth: '900px', margin: '0 auto' }}>
-            <Image src="/images/gallery_1.png" alt="Memory 1" width={200} height={200} style={{ width: '100%', aspectRatio: '1', objectFit: 'cover', borderRadius: '12px' }} />
-            <Image src="/images/gallery_2.png" alt="Memory 2" width={200} height={200} style={{ width: '100%', aspectRatio: '1', objectFit: 'cover', borderRadius: '12px' }} />
-            <Image src="/images/gallery_3.png" alt="Memory 3" width={200} height={200} style={{ width: '100%', aspectRatio: '1', objectFit: 'cover', borderRadius: '12px' }} />
-            <Image src="/images/gallery_4.png" alt="Memory 4" width={200} height={200} style={{ width: '100%', aspectRatio: '1', objectFit: 'cover', borderRadius: '12px' }} />
+            <Image src={siteSettings?.images?.gallery?.[0] || "/images/gallery_1.png"} alt="Memory 1" width={200} height={200} style={{ width: '100%', aspectRatio: '1', objectFit: 'cover', borderRadius: '12px' }} />
+            <Image src={siteSettings?.images?.gallery?.[1] || "/images/gallery_2.png"} alt="Memory 2" width={200} height={200} style={{ width: '100%', aspectRatio: '1', objectFit: 'cover', borderRadius: '12px' }} />
+            <Image src={siteSettings?.images?.gallery?.[2] || "/images/gallery_3.png"} alt="Memory 3" width={200} height={200} style={{ width: '100%', aspectRatio: '1', objectFit: 'cover', borderRadius: '12px' }} />
+            <Image src={siteSettings?.images?.gallery?.[3] || "/images/gallery_4.png"} alt="Memory 4" width={200} height={200} style={{ width: '100%', aspectRatio: '1', objectFit: 'cover', borderRadius: '12px' }} />
           </div>
         </div>
       </div>
@@ -244,7 +256,7 @@ export default function Home() {
               <p style={{ color: 'var(--gray)', marginBottom: '2rem' }}>
                 One complete package with all features included. No hidden fees, no subscriptions.
               </p>
-              <Image src="/images/pricing_illustration.png" alt="Pricing" width={350} height={300} style={{ maxWidth: '100%', width: '350px', borderRadius: '12px', height: 'auto' }} />
+              <Image src={siteSettings?.images?.pricingIllustration || "/images/pricing_illustration.png"} alt="Pricing" width={350} height={300} style={{ maxWidth: '100%', width: '350px', borderRadius: '12px', height: 'auto' }} />
             </div>
             <div style={{ flex: 1, minWidth: '320px' }}>
               <div className="pricing-preview-card featured">
@@ -297,7 +309,7 @@ export default function Home() {
         textAlign: 'center'
       }}>
         <div className="container">
-          <Image src="/images/heart_icon.png" alt="Heart" width={60} height={60} style={{ width: '60px', marginBottom: '1rem', opacity: 0.9, borderRadius: '50%', height: 'auto' }} />
+          <Image src={siteSettings?.images?.heartIcon || "/images/heart_icon.png"} alt="Heart" width={60} height={60} style={{ width: '60px', marginBottom: '1rem', opacity: 0.9, borderRadius: '50%', height: 'auto' }} />
           <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: 'white' }}>Ready to Create a Lasting Tribute?</h2>
           <p style={{ fontSize: '1.2rem', marginBottom: '2rem', opacity: 0.95, maxWidth: '600px', marginLeft: 'auto', marginRight: 'auto' }}>
             Honor your loved one&apos;s memory with a beautiful memorial that lasts forever.

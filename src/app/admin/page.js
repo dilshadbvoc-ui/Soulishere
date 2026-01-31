@@ -5,7 +5,8 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import axios from 'axios';
 import { useAuth } from '@/context/AuthContext';
-import { FaUsers, FaBook, FaMoneyBill, FaEye, FaEdit, FaTrash } from 'react-icons/fa';
+import { FaUsers, FaBook, FaMoneyBill, FaEye, FaEdit, FaTrash, FaCog } from 'react-icons/fa';
+import AdminSettings from '@/components/AdminSettings';
 import LoadingSpinner from '@/components/LoadingSpinner';
 
 export default function AdminPanel() {
@@ -126,6 +127,12 @@ export default function AdminPanel() {
                     >
                         Users
                     </button>
+                    <button
+                        className={`btn ${activeTab === 'settings' ? 'btn-primary' : 'btn-secondary'}`}
+                        onClick={() => setActiveTab('settings')}
+                    >
+                        Settings
+                    </button>
                 </div>
 
                 {/* Content Area */}
@@ -236,6 +243,11 @@ export default function AdminPanel() {
                                 </div>
                             )}
                         </>
+                    )}
+
+                    {/* Settings Tab */}
+                    {activeTab === 'settings' && (
+                        <AdminSettings token={token} />
                     )}
 
                 </div>
