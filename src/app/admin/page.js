@@ -50,7 +50,7 @@ export default function AdminPanel() {
         if (isAdmin) {
             fetchData();
         }
-    }, [isAdmin]);
+    }, [isAdmin, token]);
 
     const handleDeleteMemorial = async (id) => {
         if (!confirm('Are you sure you want to delete this memorial? This action cannot be undone.')) {
